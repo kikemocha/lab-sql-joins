@@ -1,5 +1,5 @@
 USE sakila;
-SELECT c.name as 'name_category', count(f.film_id) AS total FROM film_category AS fc
+SELECT c.name as 'name_category', count(*) AS total FROM film_category AS fc
 JOIN category AS c
 JOIN film as f
 ON c.category_id = fc.category_id AND f.film_id = fc.film_id
@@ -37,7 +37,7 @@ JOIN inventory AS i
 JOIN film AS f
 ON i.inventory_id = r.inventory_id AND f.film_id = i.film_id
 GROUP BY i.film_id
-ORDER BY total DESC;
+ORDER BY total DESC LIMIT 10;
 
 SELECT * FROM Inventory WHERE store_id = 1 AND film_id = (SELECT film_id FROM FILM WHERE title like('%Academy Dinosaur%'));
 -- Si se puede alquilar ya que hay 4 en el inventario --
